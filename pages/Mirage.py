@@ -1,40 +1,50 @@
 import streamlit as st
 from PIL import Image
 
-st.set_page_config(layout="wide")
+# page settings
+st.set_page_config(page_title='CS:GO Utilities', layout="wide")
 st.title('Mirage Smokes')
 
-# image path
+# path setting
 images_dir = 'images/mirage/'
+videos_dir = 'videos/mirage/'
 
-def openImageAndDisplay(image, dir=images_dir, width=400):
+def openImageAndDisplay(image, dir=images_dir, width=300):
+  """  Opens an image and displays it in the streamlit app. """
   image = Image.open(images_dir + image)
   st.image(image, width=width)
 
+def openVideoAndDisplay(video, dir=videos_dir):
+  """ Opens a video and displays it in the streamlit app. """
+  video_file = open(videos_dir + video, 'rb')
+  video_bytes = video_file.read()
+  st.video(video_bytes)
 
+def displayHorizontalLine():
+  """ Displays a horizontal line in the streamlit app. """
+  st.markdown("""<hr style="height:onee;background-color:#333;" /> """, unsafe_allow_html=True)
 
-
+###############################################################################
 st.markdown('##### Window')
 col1, col2, col3 = st.columns(3)
-with col1:
-  image = Image.open(images_dir + 'window.jpg')
-  st.image(image, width=400)
+with st.container():
+  with col1:
+    openImageAndDisplay('window.jpg')
+  with col2:
+    openImageAndDisplay('window-1-1.jpg')
+  with col3:
+   openImageAndDisplay('window-1-2.jpg')
 
-with col2:
-  image = Image.open(images_dir + 'window-1-1.jpg')
-  st.image(image, width=400)
-
-with col3:
-  image = Image.open(images_dir + 'window-1-2.jpg')
-  st.image(image, width=400)
-
-st.markdown("""<hr style="height:onee;background-color:#333;" /> """, unsafe_allow_html=True)
-
-
-
-
+displayHorizontalLine()
+###############################################################################
 st.markdown('##### Stairs')
-col1, col2 = st.columns(2)
-with col1:
-  image = openImageAndDisplay('stairs.jpg')
-
+col1, col2, col3, col4 = st.columns(4)
+with st.container():
+  with col1:
+    openVideoAndDisplay('stairs.mp4')
+  with col2:
+    openVideoAndDisplay('stairs.mp4')
+  with col3:
+    openVideoAndDisplay('stairs.mp4')
+  with col4:
+    openVideoAndDisplay('stairs.mp4')
